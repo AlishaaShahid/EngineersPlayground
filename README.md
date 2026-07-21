@@ -33,8 +33,10 @@ Copy `.env.example` to `.env` and fill in:
 | `VITE_SUPABASE_ANON_KEY` | Supabase → Project Settings → API → anon public key | frontend |
 | `SUPABASE_URL` | same Project URL | backend (`/api`) |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API → service_role key (secret!) | backend (`/api`) only |
+| `ANTHROPIC_API_KEY` | Anthropic Console | backend (`/api`) only, if the solution needs Claude |
+| `GROK_API_KEY` | xAI Console | backend (`/api`) only, fallback LLM if needed |
 
-Never expose `SUPABASE_SERVICE_ROLE_KEY` to the frontend or prefix it with `VITE_`.
+Never expose `SUPABASE_SERVICE_ROLE_KEY`, `ANTHROPIC_API_KEY`, or `GROK_API_KEY` to the frontend or prefix them with `VITE_` — call LLM APIs from an `/api` route, never directly from browser code.
 
 The same variables need to be added in **Vercel → Project → Settings → Environment Variables** for deployed builds.
 
