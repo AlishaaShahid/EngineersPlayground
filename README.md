@@ -23,6 +23,12 @@ npm i -g vercel
 vercel dev
 ```
 
+If your AI coding assistant doesn't pick up the Supabase skill (`.claude/skills` is gitignored — it's a machine-specific symlink), regenerate it locally:
+
+```bash
+npx skills add supabase/agent-skills
+```
+
 ## Environment variables
 
 Copy `.env.example` to `.env` and fill in:
