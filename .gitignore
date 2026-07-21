@@ -23,6 +23,10 @@ dist-ssr
 # Internal event materials — not for the public repo
 *.pdf
 
+# Agent skill symlinks (machine-specific absolute paths — regenerate locally
+# with `npx skills add supabase/agent-skills`, see skills-lock.json)
+.claude/skills
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
