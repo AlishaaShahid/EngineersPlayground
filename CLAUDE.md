@@ -24,3 +24,11 @@ Write production-grade code: clean, modular, testable, SOLID/DRY/KISS/YAGNI. Han
 ## Prompts log
 
 Log key prompts used during the build in `PROMPTS.md` — it's a required deliverable for the judge presentation ("AI/vibe-coding approach & key prompts").
+
+## Key decisions already made (don't re-litigate)
+
+- **Node over FastAPI for `/api`**: same language as the frontend (shared types, no context-switching), and Vercel deploys Node functions with zero config vs. extra Python runtime config for FastAPI. Only reconsider if the problem statement is clearly Python/ML-shaped.
+- **One database (Supabase/Postgres), not MongoDB**: schema-flexibility needs are covered by `jsonb` columns. A second DB adds a second set of credentials/clients/failure points for a hypothetical need. Don't provision Mongo unless the actual problem statement requires a document-store feature Postgres can't do.
+- **Scalability = architected-to-scale, not built-to-scale**: default to the free wins always — stateless functions, correct indexing, no N+1 queries, upserts/idempotency where natural, clean separation of concerns so pieces can scale independently later. Do NOT build actual scaling infra (queues, sharding, read replicas, custom rate limiting, caching layers like Redis) unless the problem statement explicitly calls for it — that costs real build time for zero visible payoff in a 2-hour demo.
+- **Security stays a hard default regardless of timebox** — validation, no hardcoded secrets, RLS-appropriate Supabase access patterns. This is the one category from the code standards that isn't relaxed for the timebox.
+- Squad is 3 engineers, all added as GitHub collaborators on this repo.
